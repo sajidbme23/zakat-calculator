@@ -7,52 +7,47 @@
     <style>
         /* Background & Basic Body Styling */
         body {
-            margin: 0;
-            padding: 0;
+            margin: 0; padding: 0;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), 
+            background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), 
                         url('https://images.unsplash.com/photo-1584551246679-0daf3d275d0f?auto=format&fit=crop&q=80&w=1080') no-repeat center center fixed;
-            background-size: cover;
-            color: white;
+            background-size: cover; color: white;
         }
 
         /* Dark Glassmorphism Container */
         .container {
-            max-width: 600px;
-            margin: 30px auto;
-            background: rgba(0, 0, 0, 0.85);
-            padding: 25px;
-            border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.8);
+            max-width: 650px; margin: 30px auto;
+            background: rgba(0, 0, 0, 0.85); padding: 25px;
+            border-radius: 15px; box-shadow: 0 4px 20px rgba(0,0,0,0.9);
             border: 1px solid rgba(255,255,255,0.2);
         }
 
         h1, h2, h3 { text-align: center; margin-top: 0; }
+        .subtitle { text-align: center; font-size: 0.9em; color: #cbd5e1; margin-bottom: 20px; }
         
         /* Tabs Styling */
-        .tabs { display: flex; margin-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.3); }
+        .tabs { display: flex; margin-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.3); overflow-x: auto;}
         .tab { 
             flex: 1; text-align: center; padding: 10px; cursor: pointer; 
-            background: rgba(255,255,255,0.1); border-radius: 10px 10px 0 0; margin-right: 5px;
+            background: rgba(255,255,255,0.05); border-radius: 10px 10px 0 0; margin-right: 5px;
+            white-space: nowrap; font-size: 0.9em;
         }
         .tab.active { background: #4ade80; color: #000; font-weight: bold; }
 
         /* Form Layout */
         .form-group { margin-bottom: 15px; }
         .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-        label { display: block; margin-bottom: 5px; font-size: 0.9em; }
+        label { display: block; margin-bottom: 5px; font-size: 0.9em; color: #94a3b8; }
         input[type="number"] {
             width: 100%; padding: 10px; box-sizing: border-box;
             background: rgba(255,255,255,0.1); color: white;
-            border: 1px solid rgba(255,255,255,0.3); border-radius: 5px;
-            font-size: 1em;
+            border: 1px solid rgba(255,255,255,0.3); border-radius: 5px; font-size: 1em;
         }
         
         /* Buttons */
         button.calc-btn {
             width: 100%; padding: 12px; font-size: 1.1em; font-weight: bold;
-            background: #2563eb; color: white; border: none; border-radius: 5px;
-            cursor: pointer; margin-top: 10px;
+            background: #2563eb; color: white; border: none; border-radius: 5px; cursor: pointer; margin-top: 10px;
         }
         button.calc-btn:hover { background: #1d4ed8; }
         
@@ -62,98 +57,145 @@
         }
 
         /* Results Box */
-        #result-box {
+        .result-box {
             display: none; margin-top: 20px; padding: 15px;
             background: rgba(255,255,255,0.1); border-radius: 10px; border: 1px solid #4ade80;
         }
         .success-text { color: #4ade80; font-size: 1.2em; text-align: center; font-weight: bold; margin: 10px 0;}
         .warning-text { color: #facc15; font-size: 1.1em; text-align: center;}
+        .qurbani-text { color: #38bdf8; font-size: 1em; text-align: center; margin-top: 10px; font-weight: bold;}
         
         /* Hidden Sections */
         .content-section { display: none; }
         .content-section.active { display: block; }
         
-        .info-card { background: rgba(255,255,255,0.1); padding: 10px; border-radius: 5px; margin-bottom: 10px;}
+        /* Info Cards */
+        .info-card { background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin-bottom: 15px; border-left: 4px solid #4ade80;}
+        .info-card h4 { margin: 0 0 10px 0; color: #4ade80; }
+        .quran-ref { font-style: italic; color: #cbd5e1; font-size: 0.9em; margin-top: 8px; display: block; background: rgba(0,0,0,0.3); padding: 8px; border-radius: 5px;}
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h1>🕌 Zakat Calculator</h1>
-    <p style="text-align: center; font-size: 0.9em;">As-salamu alaykum! Apna hisaab aur daan ki jankari yahan dekhein.</p>
+    <h1>🕌 Charity & Zakat App</h1>
+    <p class="subtitle">As-salamu alaykum! Apna hisaab aur daan ki mukammal jankari yahan dekhein.</p>
     
     <div class="tabs">
-        <div class="tab active" onclick="switchTab('calcTab', this)">🧮 Calculator</div>
+        <div class="tab active" onclick="switchTab('calcTab', this)">🧮 Zakat Calc</div>
+        <div class="tab" onclick="switchTab('fitrahTab', this)">🌾 Fitrah & Fidyah</div>
         <div class="tab" onclick="switchTab('infoTab', this)">📖 Jankari</div>
     </div>
 
     <div id="calcTab" class="content-section active">
-        <h3>📝 Apni Details Bharein</h3>
-        
+        <h3>📝 Zakat ki Details Bharein</h3>
         <div class="grid-2">
-            <div class="form-group">
-                <label>1g Sone ka rate (₹)</label>
-                <input type="number" id="goldRate" value="7500">
-            </div>
-            <div class="form-group">
-                <label>1g Chandi ka rate (₹)</label>
-                <input type="number" id="silverRate" value="90">
-            </div>
-            
-            <div class="form-group">
-                <label>Sona (Grams mein)</label>
-                <input type="number" id="goldWeight" value="0">
-            </div>
-            <div class="form-group">
-                <label>Chandi (Grams mein)</label>
-                <input type="number" id="silverWeight" value="0">
-            </div>
-            
-            <div class="form-group">
-                <label>Cash / Bank Balance (₹)</label>
-                <input type="number" id="cash" value="0">
-            </div>
-            <div class="form-group">
-                <label>Business / Property (₹)</label>
-                <input type="number" id="investment" value="0">
-            </div>
-            
-            <div class="form-group">
-                <label>Udhaar (Wapas milne wala)</label>
-                <input type="number" id="loans" value="0">
-            </div>
-            <div class="form-group">
-                <label>Aap par Karz (Minus hoga)</label>
-                <input type="number" id="liabilities" value="0">
-            </div>
+            <div class="form-group"><label>1g Sone ka rate (₹)</label><input type="number" id="goldRate" value="7500"></div>
+            <div class="form-group"><label>1g Chandi ka rate (₹)</label><input type="number" id="silverRate" value="90"></div>
+            <div class="form-group"><label>Sona (Grams mein)</label><input type="number" id="goldWeight" value="0"></div>
+            <div class="form-group"><label>Chandi (Grams mein)</label><input type="number" id="silverWeight" value="0"></div>
+            <div class="form-group"><label>Cash / Bank Balance (₹)</label><input type="number" id="cash" value="0"></div>
+            <div class="form-group"><label>Business / Property (₹)</label><input type="number" id="investment" value="0"></div>
+            <div class="form-group"><label>Udhaar (Wapas aane wala)</label><input type="number" id="loans" value="0"></div>
+            <div class="form-group"><label>Aap par Karz (Minus hoga)</label><input type="number" id="liabilities" value="0"></div>
         </div>
-        
         <button class="calc-btn" onclick="calculateZakat()">Zakat Calculate Karein</button>
         
-        <div id="result-box">
-            <h3 style="border-bottom: 1px solid #aaa; padding-bottom: 5px;">📊 Calculation Report</h3>
-            <p><strong>Total Assets:</strong> ₹ <span id="res-total">0</span></p>
-            <p><strong>Karz (Liabilities):</strong> ₹ <span id="res-liab">0</span></p>
-            <p><strong>Net Assets:</strong> ₹ <span id="res-net">0</span></p>
+        <div id="zakat-result" class="result-box">
+            <h3 style="border-bottom: 1px solid #aaa; padding-bottom: 5px;">📊 Zakat Report</h3>
+            <p><strong>Net Assets (Karz nikal kar):</strong> ₹ <span id="res-net">0</span></p>
             <p style="color: #60a5fa;">💡 <strong>Hanafi Nisab (612.36g Chandi):</strong> ₹ <span id="res-nisab">0</span></p>
+            <div id="zakat-decision"></div>
+            <button class="refresh-btn" onclick="location.reload()">🔄 Naya Hisaab</button>
+        </div>
+    </div>
+
+    <div id="fitrahTab" class="content-section">
+        <h3>🌾 Fitrah, Fidyah aur Kaffarah</h3>
+        <p style="font-size: 0.85em; color: #94a3b8; text-align: center;">Ek Fitrah/Fidyah ki rakam lagbhag 2kg gehun (wheat) ki market value ke barabar hoti hai.</p>
+        
+        <div class="form-group">
+            <label>1 Fitrah/Fidyah ki Rakam (₹) - [Local Gehun ke rate hisaab se edit karein]</label>
+            <input type="number" id="fitrahRate" value="60">
+        </div>
+
+        <div class="grid-2">
+            <div class="form-group">
+                <label>Ghar ke Sadasya (Fitrah ke liye)</label>
+                <input type="number" id="familyMembers" value="0">
+            </div>
+            <div class="form-group">
+                <label>Chhoote hue Roze (Fidyah ke liye)</label>
+                <input type="number" id="missedFasts" value="0">
+            </div>
+        </div>
+
+        <button class="calc-btn" onclick="calculateOtherCharity()" style="background: #10b981;">Calculate Karein</button>
+
+        <div id="other-result" class="result-box">
+            <h3 style="border-bottom: 1px solid #aaa; padding-bottom: 5px;">📋 Aapka Hisaab</h3>
+            <p><strong>Kul Fitrana (Sadaqah al-Fitr):</strong> ₹ <span id="res-fitrah" style="color:#4ade80; font-weight:bold; font-size:1.2em;">0</span></p>
+            <p><strong>Kul Fidyah (Rozon ka):</strong> ₹ <span id="res-fidyah" style="color:#4ade80; font-weight:bold; font-size:1.2em;">0</span></p>
             
-            <div id="final-decision"></div>
-            <button class="refresh-btn" onclick="location.reload()">🔄 Naya Hisaab Karein</button>
+            <hr style="border-color: rgba(255,255,255,0.2); margin: 15px 0;">
+            <h4 style="margin: 0 0 10px 0;">⚠️ Kaffarah (Jurmana) Details:</h4>
+            <p style="font-size: 0.9em;">- <strong>Kasam Todne ka Kaffarah</strong> (10 miskeen ko khana): ₹ <span id="res-kasam" style="color:#facc15; font-weight:bold;">0</span></p>
+            <p style="font-size: 0.9em;">- <strong>Roza Todne ka Kaffarah</strong> (60 miskeen ko khana): ₹ <span id="res-roza" style="color:#ef4444; font-weight:bold;">0</span></p>
         </div>
     </div>
 
     <div id="infoTab" class="content-section">
         <h3>📖 Islam Mein Daan Ki Qismein</h3>
-        <div class="info-card"><strong>1️⃣ Zakat:</strong> 2.5% saal bhar ki jama maal par (Nisab se zyada hone par). Sirf Muslim gareeb ko di jati hai.</div>
-        <div class="info-card"><strong>2️⃣ Sadaqah:</strong> Nafl daan. Kabhi bhi, kisi ko bhi de sakte hain. Jaanwaron ko khilana bhi sadaqah hai.</div>
-        <div class="info-card"><strong>3️⃣ Fitrah:</strong> Ramzan ke end par, Eid se pehle diya jata hai.</div>
-        <div class="info-card"><strong>4️⃣ Lillah:</strong> Pure Allah ke liye voluntary daan.</div>
-        <div class="info-card"><strong>5️⃣ Waqf:</strong> Permanent charity jaise masjid ya madrasa ke liye property dena.</div>
+        <p style="font-size: 0.9em; color: #cbd5e1;">Islam mein (Hanafi Fiqh ke mutabiq) daan ya charity ka ek poora system hai jise alag-alag hisson mein banta gaya hai.</p>
+        
+        <div class="info-card">
+            <h4>1. FARZ (Obligatory Charity)</h4>
+            <p>Yeh wo daan hai jo ek khush-haal musalman par har haal mein farz hai, iske na dene par gunah milta hai.</p>
+            <ul>
+                <li><strong>Zakat (Maal ki Zakat):</strong> Saal bhar ki bachat aur assets par 2.5% daan karna. Misaal ke taur par, agar kisi ke paas nisab se zyada chandi/sona hai, toh total value par 2.5% zakat dena farz hoga.</li>
+                <li><strong>Ushr (Faslon ki Zakat):</strong> Kheti se hone wali paidaish par (Baarish ke paani par 10%, apne kharch ke paani par 5%).</li>
+            </ul>
+            <span class="quran-ref">📖 Quran: "Namaz qaim karo aur Zakat ada karo." (Surah Al-Baqarah 2:43)</span>
+            <span class="quran-ref">📖 Quran: "Aur jis din fasal kate, uska haq (Zakat/Ushr) ada karo." (Surah Al-An'am 6:141)</span>
+        </div>
+
+        <div class="info-card">
+            <h4>2. WAJIB (Necessary Charity)</h4>
+            <p>Yeh Farz ke qareeb hota hai, iska ada karna bhi zaroori hai.</p>
+            <ul>
+                <li><strong>Sadaqah al-Fitr (Fitrana):</strong> Ramzan ki galtiyon ko paak karne aur gareebon ki Eid ki khushi ke liye. (Kareeb 1.75 se 2 kg gehun ke barabar).</li>
+                <li><strong>Qurbani (Udhiyah):</strong> Eid-ul-Adha par. Har us shakhs par wajib hai jiske paas Zakat ke nisab ke barabar daulat ho.</li>
+            </ul>
+            <span class="quran-ref">🕌 Hadees: Rasoolullah (SAW) ne Sadqatul-Fitr wajib qarar diya hai... (Sahih al-Bukhari 1503)</span>
+            <span class="quran-ref">🕌 Hadees: "Jiske paas gunjaish ho aur wo qurbani na kare, wo hamari eidgah ke qareeb na aaye." (Sunan Ibn Majah 3123)</span>
+        </div>
+
+        <div class="info-card">
+            <h4>3. KAFFARAH aur FIDYAH</h4>
+            <p>Kisi ibadat ke chhootne ya galti ke kaffare (penalty) ke taur par diya jata hai.</p>
+            <ul>
+                <li><strong>Fidyah:</strong> Beemari ya budhape ki wajah se roza na rakh paane par (Ek roze ka fidyah = 1 Fitrana).</li>
+                <li><strong>Kaffarah:</strong> Kasam todne ka kaffarah 10 gareebon ko khana khilana. Jaan-boojh kar roza todne ka kaffarah 60 gareebon ko khana khilana hai.</li>
+            </ul>
+            <span class="quran-ref">📖 Quran: "Aur jo log iski taqat na rakhein, wo fidyah mein ek miskeen ko khana khilayein." (Surah Al-Baqarah 2:184)</span>
+            <span class="quran-ref">📖 Quran: (Kasam ka Kaffarah) 10 gareebon ko do waqt ka khana khilana ya unhe kapde pehnana hai. (Surah Al-Ma'idah 5:89)</span>
+        </div>
+
+        <div class="info-card">
+            <h4>4. NAFL / MUSTAHAB</h4>
+            <p>Apni khushi aur haisiyat ke hisaab se kabhi bhi kiya jane wala daan.</p>
+            <ul>
+                <li><strong>Sadaqah Jariyah:</strong> Waqf karna (Masjid, kuan, ped lagana) jiska sawab marne ke baad bhi milta rahe.</li>
+                <li><strong>Aqeeqah:</strong> Bacha paida hone ki khushi mein shukrane ke taur par janwar zibah karna.</li>
+                <li><strong>Aam Sadaqah (Lillah):</strong> Kisi bhi zarooratmand ki madad karna, ya sirf muskurana bhi sadaqah hai.</li>
+            </ul>
+            <span class="quran-ref">🕌 Hadees: "Jab insaan mar jata hai toh uske aamal ka silsila khatam ho jata hai sivaye teen cheezon ke: Sadaqah Jariyah, Ilm, ya Nek aulad..." (Sahih Muslim 1631)</span>
+            <span class="quran-ref">🕌 Hadees: "Tumhara apne bhai ke samne muskurana bhi sadaqah hai." (Jami at-Tirmidhi 1956)</span>
+        </div>
     </div>
 </div>
 
 <script>
-    // Tab switch karne ka logic
     function switchTab(tabId, element) {
         document.querySelectorAll('.content-section').forEach(sec => sec.classList.remove('active'));
         document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
@@ -161,7 +203,6 @@
         element.classList.add('active');
     }
 
-    // Zakat Calculate karne ka logic
     function calculateZakat() {
         let goldRate = parseFloat(document.getElementById('goldRate').value) || 0;
         let silverRate = parseFloat(document.getElementById('silverRate').value) || 0;
@@ -176,24 +217,40 @@
         let netAssets = totalAssets - liabilities;
         let nisab = 612.36 * silverRate;
 
-        document.getElementById('res-total').innerText = totalAssets.toLocaleString('en-IN');
-        document.getElementById('res-liab').innerText = liabilities.toLocaleString('en-IN');
         document.getElementById('res-net').innerText = netAssets.toLocaleString('en-IN');
         document.getElementById('res-nisab').innerText = nisab.toLocaleString('en-IN');
 
-        let decisionBox = document.getElementById('final-decision');
+        let decisionBox = document.getElementById('zakat-decision');
         if (netAssets >= nisab) {
             let zakat = netAssets * 0.025;
             decisionBox.innerHTML = `
                 <div class="success-text">✨ Masha Allah, aap par Zakat farz hai!</div>
                 <div class="success-text" style="font-size: 1.5em; background: rgba(74, 222, 128, 0.2); padding: 10px; border-radius: 5px;">
                     Aapki Zakat: ₹ ${zakat.toLocaleString('en-IN')}
-                </div>`;
+                </div>
+                <div class="qurbani-text">🕋 Sath hi, Nisab mukammal hone ki wajah se aap par Qurbani bhi Wajib hai.</div>`;
         } else {
             decisionBox.innerHTML = `<div class="warning-text">Aapke net assets Nisab limit se kam hain. Aap par Zakat farz nahi hai.</div>`;
         }
+        document.getElementById('zakat-result').style.display = 'block';
+    }
 
-        document.getElementById('result-box').style.display = 'block';
+    function calculateOtherCharity() {
+        let fitrahRate = parseFloat(document.getElementById('fitrahRate').value) || 0;
+        let familyMembers = parseFloat(document.getElementById('familyMembers').value) || 0;
+        let missedFasts = parseFloat(document.getElementById('missedFasts').value) || 0;
+
+        let totalFitrah = fitrahRate * familyMembers;
+        let totalFidyah = fitrahRate * missedFasts;
+        let kasamKaffarah = fitrahRate * 10; // 10 logon ka khana
+        let rozaKaffarah = fitrahRate * 60;  // 60 logon ka khana
+
+        document.getElementById('res-fitrah').innerText = totalFitrah.toLocaleString('en-IN');
+        document.getElementById('res-fidyah').innerText = totalFidyah.toLocaleString('en-IN');
+        document.getElementById('res-kasam').innerText = kasamKaffarah.toLocaleString('en-IN');
+        document.getElementById('res-roza').innerText = rozaKaffarah.toLocaleString('en-IN');
+
+        document.getElementById('other-result').style.display = 'block';
     }
 </script>
 
