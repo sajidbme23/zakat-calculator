@@ -69,11 +69,16 @@
         .content-section { display: none; }
         .content-section.active { display: block; }
         
-        /* Info Cards */
-        .info-card { background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin-bottom: 15px; border-left: 4px solid #4ade80;}
-        .info-card h4 { margin: 0 0 10px 0; color: #4ade80; }
-        .quran-ref { font-style: italic; color: #cbd5e1; font-size: 0.9em; margin-top: 8px; display: block; background: rgba(0,0,0,0.3); padding: 8px; border-radius: 5px;}
+        /* Info Cards & Quran Formatting */
+        .info-card { background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin-bottom: 20px; border-left: 4px solid #4ade80;}
+        .info-card h4 { margin: 0 0 10px 0; color: #4ade80; font-size: 1.1em;}
+        .quran-box { background: rgba(0,0,0,0.5); padding: 15px; border-radius: 8px; margin: 15px 0; border: 1px solid rgba(255,255,255,0.1); }
+        .arabic-text { font-family: 'Amiri', 'Traditional Arabic', serif; font-size: 1.8em; text-align: right; color: #facc15; margin: 10px 0; line-height: 1.5; }
+        .tarjuma { font-style: italic; color: #bae6fd; font-size: 1em; }
+        .calc-detail { background: rgba(74, 222, 128, 0.1); padding: 10px; border-radius: 5px; font-size: 0.9em; margin-top: 10px; border-left: 3px solid #4ade80;}
+        .special-note { background: rgba(245, 158, 11, 0.1); padding: 12px; border-radius: 8px; font-size: 0.9em; border: 1px solid #f59e0b; color: #fcd34d; margin-top: 20px;}
     </style>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
@@ -136,7 +141,6 @@
             <h3 style="border-bottom: 1px solid #aaa; padding-bottom: 5px;">📋 Aapka Hisaab</h3>
             <p><strong>Kul Fitrana (Sadaqah al-Fitr):</strong> ₹ <span id="res-fitrah" style="color:#4ade80; font-weight:bold; font-size:1.2em;">0</span></p>
             <p><strong>Kul Fidyah (Rozon ka):</strong> ₹ <span id="res-fidyah" style="color:#4ade80; font-weight:bold; font-size:1.2em;">0</span></p>
-            
             <hr style="border-color: rgba(255,255,255,0.2); margin: 15px 0;">
             <h4 style="margin: 0 0 10px 0;">⚠️ Kaffarah (Jurmana) Details:</h4>
             <p style="font-size: 0.9em;">- <strong>Kasam Todne ka Kaffarah</strong> (10 miskeen ko khana): ₹ <span id="res-kasam" style="color:#facc15; font-weight:bold;">0</span></p>
@@ -145,53 +149,93 @@
     </div>
 
     <div id="infoTab" class="content-section">
-        <h3>📖 Islam Mein Daan Ki Qismein</h3>
-        <p style="font-size: 0.9em; color: #cbd5e1;">Islam mein (Hanafi Fiqh ke mutabiq) daan ya charity ka ek poora system hai jise alag-alag hisson mein banta gaya hai.</p>
+        <h3 style="margin-bottom: 5px;">📖 Islam Mein Daan Ki Qismein</h3>
+        <p style="text-align: center; font-size: 0.9em; color: #cbd5e1; margin-bottom: 25px;">Quran ke hawalo (references) ke sath poori detail.</p>
         
         <div class="info-card">
-            <h4>1. FARZ (Obligatory Charity)</h4>
-            <p>Yeh wo daan hai jo ek khush-haal musalman par har haal mein farz hai, iske na dene par gunah milta hai.</p>
-            <ul>
-                <li><strong>Zakat (Maal ki Zakat):</strong> Saal bhar ki bachat aur assets par 2.5% daan karna. Misaal ke taur par, agar kisi ke paas nisab se zyada chandi/sona hai, toh total value par 2.5% zakat dena farz hoga.</li>
-                <li><strong>Ushr (Faslon ki Zakat):</strong> Kheti se hone wali paidaish par (Baarish ke paani par 10%, apne kharch ke paani par 5%).</li>
-            </ul>
-            <span class="quran-ref">📖 Quran: "Namaz qaim karo aur Zakat ada karo." (Surah Al-Baqarah 2:43)</span>
-            <span class="quran-ref">📖 Quran: "Aur jis din fasal kate, uska haq (Zakat/Ushr) ada karo." (Surah Al-An'am 6:141)</span>
+            <h4>1. ZAKAT (Sabse Zaroori Daan - Farz)</h4>
+            <p style="font-size: 0.95em;">Zakat har us musalman par farz hai jiske paas ek tay shuda miqdar (Nisab) ke barabar maal ek saal tak jama ho.</p>
+            
+            <div class="quran-box">
+                <p style="margin: 0; font-size: 0.85em; color: #cbd5e1;"><strong>📖 Quran ka Hawala:</strong> Para: 1 (Alif-Laam-Meem) | Surah Al-Baqarah (2), Aayat No: 43</p>
+                <p class="arabic-text" dir="rtl">وَأَقِيمُوا الصَّلَاةَ وَآتُوا الزَّكَاةَ</p>
+                <p class="tarjuma"><strong>Tarjuma:</strong> "Aur namaz qaim karo aur Zakat ada karo."</p>
+            </div>
+            
+            <div class="calc-detail">
+                <strong>📝 Aasan Calculation:</strong> Hanafi nisab 612.36 gram chandi hai. Misaal ke taur par, ghar mein biwi ke paas 650 gram chandi hai, toh yeh nisab se zyada hai. Isliye aapko saal mein ek baar is chandi ki aaj ki total value ka 2.5% nikal kar gareebon mein bantna hoga. Yahi rule cash aur sone par bhi lagta hai.
+            </div>
+
+            <div class="quran-box" style="margin-top: 15px;">
+                <p style="margin: 0; font-size: 0.85em; color: #cbd5e1;"><strong>💡 Zakat Kise Dein?</strong> Para: 10 (Wa'lamu) | Surah At-Tawbah (9), Aayat No: 60</p>
+                <p class="tarjuma" style="margin-top: 10px;"><strong>Tarjuma:</strong> "Beshak Zakat toh faqreeron (gareebon), miskeenon (mohtajon), zakat ikhatta karne walo, aur jinka dil Islam ki taraf mائل karna ho, aur gardanein chhudane (ghulamon ko azaad karne) mein, aur karzdaron ke liye, aur Allah ki raah mein, aur musafiron ke liye hai."</p>
+            </div>
         </div>
 
         <div class="info-card">
-            <h4>2. WAJIB (Necessary Charity)</h4>
-            <p>Yeh Farz ke qareeb hota hai, iska ada karna bhi zaroori hai.</p>
-            <ul>
-                <li><strong>Sadaqah al-Fitr (Fitrana):</strong> Ramzan ki galtiyon ko paak karne aur gareebon ki Eid ki khushi ke liye. (Kareeb 1.75 se 2 kg gehun ke barabar).</li>
-                <li><strong>Qurbani (Udhiyah):</strong> Eid-ul-Adha par. Har us shakhs par wajib hai jiske paas Zakat ke nisab ke barabar daulat ho.</li>
-            </ul>
-            <span class="quran-ref">🕌 Hadees: Rasoolullah (SAW) ne Sadqatul-Fitr wajib qarar diya hai... (Sahih al-Bukhari 1503)</span>
-            <span class="quran-ref">🕌 Hadees: "Jiske paas gunjaish ho aur wo qurbani na kare, wo hamari eidgah ke qareeb na aaye." (Sunan Ibn Majah 3123)</span>
+            <h4>2. USHR (Fasal ya Kheti ka Daan - Farz)</h4>
+            <p style="font-size: 0.95em;">Agar aap kisan hain aur kheti karte hain, toh fasal katne par Zakat ki tarah 'Ushr' nikalna farz hai.</p>
+            
+            <div class="quran-box">
+                <p style="margin: 0; font-size: 0.85em; color: #cbd5e1;"><strong>📖 Quran ka Hawala:</strong> Para: 8 (Wa Lau Annana) | Surah Al-An'am (6), Aayat No: 141</p>
+                <p class="arabic-text" dir="rtl">وَآتُوا حَقَّهُ يَوْمَ حَصَادِهِ</p>
+                <p class="tarjuma"><strong>Tarjuma:</strong> "Aur jis din fasal kate, uska haq (Zakat/Ushr) ada karo."</p>
+            </div>
+            
+            <div class="calc-detail">
+                <strong>📝 Aasan Calculation:</strong> Agar khet mein baarish ke paani se fasal hui hai, toh paidaish ka 10% daan dena hai. Agar aapne apne paiso se motor/tubewell chala kar paani diya hai, toh paidaish ka 5% daan dena hai.
+            </div>
         </div>
 
         <div class="info-card">
-            <h4>3. KAFFARAH aur FIDYAH</h4>
-            <p>Kisi ibadat ke chhootne ya galti ke kaffare (penalty) ke taur par diya jata hai.</p>
-            <ul>
-                <li><strong>Fidyah:</strong> Beemari ya budhape ki wajah se roza na rakh paane par (Ek roze ka fidyah = 1 Fitrana).</li>
-                <li><strong>Kaffarah:</strong> Kasam todne ka kaffarah 10 gareebon ko khana khilana. Jaan-boojh kar roza todne ka kaffarah 60 gareebon ko khana khilana hai.</li>
-            </ul>
-            <span class="quran-ref">📖 Quran: "Aur jo log iski taqat na rakhein, wo fidyah mein ek miskeen ko khana khilayein." (Surah Al-Baqarah 2:184)</span>
-            <span class="quran-ref">📖 Quran: (Kasam ka Kaffarah) 10 gareebon ko do waqt ka khana khilana ya unhe kapde pehnana hai. (Surah Al-Ma'idah 5:89)</span>
+            <h4>3. FIDYAH (Roza na rakh paane ki Majboori ka Daan)</h4>
+            <p style="font-size: 0.95em;">Agar koi shakhs budhape ya aisi beemari ki wajah se Ramzan ke roze nahi rakh sakta jiske theek hone ki umeed nahi hai, toh us par har roze ke badle daan (Fidyah) dena lazmi hai.</p>
+            
+            <div class="quran-box">
+                <p style="margin: 0; font-size: 0.85em; color: #cbd5e1;"><strong>📖 Quran ka Hawala:</strong> Para: 2 (Sayaqool) | Surah Al-Baqarah (2), Aayat No: 184</p>
+                <p class="arabic-text" dir="rtl">وَعَلَى الَّذِينَ يُطِيقُونَهُ فِدْيَةٌ طَعَامُ مِسْكِينٍ</p>
+                <p class="tarjuma"><strong>Tarjuma:</strong> "Aur jo log iski taqat na rakhein (yaani bohut mushkil se rakh sakein/beemari ki wajah se), unpar fidyah hai ek miskeen (gareeb) ko khana khilana."</p>
+            </div>
+            
+            <div class="calc-detail">
+                <strong>📝 Aasan Calculation:</strong> Ek roza chhootne par ek gareeb ko do waqt ka pet bhar khana khilana, ya ek 'Fitrane' ke barabar rakam (kareeb 2 kg gehun ka daam) dena.
+            </div>
         </div>
 
         <div class="info-card">
-            <h4>4. NAFL / MUSTAHAB</h4>
-            <p>Apni khushi aur haisiyat ke hisaab se kabhi bhi kiya jane wala daan.</p>
-            <ul>
-                <li><strong>Sadaqah Jariyah:</strong> Waqf karna (Masjid, kuan, ped lagana) jiska sawab marne ke baad bhi milta rahe.</li>
-                <li><strong>Aqeeqah:</strong> Bacha paida hone ki khushi mein shukrane ke taur par janwar zibah karna.</li>
-                <li><strong>Aam Sadaqah (Lillah):</strong> Kisi bhi zarooratmand ki madad karna, ya sirf muskurana bhi sadaqah hai.</li>
-            </ul>
-            <span class="quran-ref">🕌 Hadees: "Jab insaan mar jata hai toh uske aamal ka silsila khatam ho jata hai sivaye teen cheezon ke: Sadaqah Jariyah, Ilm, ya Nek aulad..." (Sahih Muslim 1631)</span>
-            <span class="quran-ref">🕌 Hadees: "Tumhara apne bhai ke samne muskurana bhi sadaqah hai." (Jami at-Tirmidhi 1956)</span>
+            <h4>4. KAFFARAH (Galti ya Jurmane ka Daan)</h4>
+            <p style="font-size: 0.95em;">Agar koi jaan-boojh kar Allah ki kasam khaye aur use tod de, toh use is gunah ki maafi ke liye daan (Kaffarah) dena hota hai.</p>
+            
+            <div class="quran-box">
+                <p style="margin: 0; font-size: 0.85em; color: #cbd5e1;"><strong>📖 Quran ka Hawala:</strong> Para: 7 (Wa Iza Sami'u) | Surah Al-Ma'idah (5), Aayat No: 89</p>
+                <p class="arabic-text" dir="rtl">فَكَفَّارَتُهُ إِطْعَامُ عَشَرَةِ مَسَاكِينَ مِنْ أَوْسَطِ مَا تُطْعِمُونَ أَهْلِيكُمْ أَوْ كِسْوَتُهُمْ</p>
+                <p class="tarjuma"><strong>Tarjuma:</strong> "Toh iska kaffarah (kasam todne ka) 10 miskeenon ko ausat darje ka (average) khana khilana hai jo tum apne ghar walon ko khilate ho, ya unhe kapde pehnana hai."</p>
+            </div>
+            
+            <div class="calc-detail">
+                <strong>📝 Aasan Calculation:</strong> 10 gareebon ko do waqt ka khana khilana ya 10 gareebon ko jode kapde dena.
+            </div>
         </div>
+
+        <div class="info-card">
+            <h4>5. AAM SADAQAH (Apni Khushi aur Marzi ka Daan)</h4>
+            <p style="font-size: 0.95em;">Yeh wo daan hai jo aap kabhi bhi, kitna bhi apni khushi se de sakte hain. Allah ise bohut pasand karta hai.</p>
+            
+            <div class="quran-box">
+                <p style="margin: 0; font-size: 0.85em; color: #cbd5e1;"><strong>📖 Quran ka Hawala:</strong> Para: 3 (Tilkal Rusulu) | Surah Al-Baqarah (2), Aayat No: 261</p>
+                <p class="arabic-text" dir="rtl" style="font-size: 1.5em;">مَّثَلُ الَّذِينَ يُنفِقُونَ أَمْوَالَهُمْ فِي سَبِيلِ اللَّهِ كَمَثَلِ حَبَّةٍ أَنبَتَتْ سَبْعَ سَنَابِلَ فِي كُلِّ سُنبُلَةٍ مِّائَةُ حَبَّةٍ</p>
+                <p class="tarjuma"><strong>Tarjuma:</strong> "Jo log apne maal Allah ki raah mein kharch karte hain, unki misaal us daane jaisi hai jisne 7 baaliyan ugaayi aur har baali mein 100 daane hon. Aur Allah jiske liye chahta hai (sawab ko) aur badha deta hai."</p>
+            </div>
+            
+            <div class="calc-detail">
+                <strong>📝 Aasan Calculation:</strong> Iski koi limit nahi hai. Yeh raaste mein zarooratmand ko paise dena, pyase ko paani pilana, ya Masjid/Madrase mein madad karna sab isme aata hai.
+            </div>
+        </div>
+
+        <div class="special-note">
+            <strong>⚠️ Ek Zaroori Note:</strong> Eid par diya jane wala Sadaqah al-Fitr (Fitrana) aur Bakreed par ki jane wali Qurbani dono <strong>'Wajib'</strong> hain. Inka hukm seedhe taur par Quran ki aayaton mein is naam se nahi hai, balki Nabi (SAW) ki Sahih Hadeeson aur unki sunnat se sabit hai, jise manna har musalman par lazmi hai.
+        </div>
+
     </div>
 </div>
 
@@ -242,8 +286,8 @@
 
         let totalFitrah = fitrahRate * familyMembers;
         let totalFidyah = fitrahRate * missedFasts;
-        let kasamKaffarah = fitrahRate * 10; // 10 logon ka khana
-        let rozaKaffarah = fitrahRate * 60;  // 60 logon ka khana
+        let kasamKaffarah = fitrahRate * 10; 
+        let rozaKaffarah = fitrahRate * 60;  
 
         document.getElementById('res-fitrah').innerText = totalFitrah.toLocaleString('en-IN');
         document.getElementById('res-fidyah').innerText = totalFidyah.toLocaleString('en-IN');
